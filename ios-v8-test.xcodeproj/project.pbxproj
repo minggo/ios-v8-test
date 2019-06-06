@@ -12,7 +12,9 @@
 		46D3107F22A90177001D4590 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46D3107D22A90177001D4590 /* Main.storyboard */; };
 		46D3108122A90178001D4590 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46D3108022A90178001D4590 /* Assets.xcassets */; };
 		46D3108422A90178001D4590 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46D3108222A90178001D4590 /* LaunchScreen.storyboard */; };
-		46D3108722A90178001D4590 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D3108622A90178001D4590 /* main.m */; };
+		46D3108722A90178001D4590 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 46D3108622A90178001D4590 /* main.mm */; };
+		46D3108F22A901DE001D4590 /* v8test.mm in Sources */ = {isa = PBXBuildFile; fileRef = 46D3108D22A901DE001D4590 /* v8test.mm */; };
+		46D3109222A90271001D4590 /* libv8_monolith.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46D3109122A90271001D4590 /* libv8_monolith.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +27,10 @@
 		46D3108022A90178001D4590 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		46D3108322A90178001D4590 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		46D3108522A90178001D4590 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		46D3108622A90178001D4590 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		46D3108622A90178001D4590 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		46D3108D22A901DE001D4590 /* v8test.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = v8test.mm; sourceTree = "<group>"; };
+		46D3108E22A901DE001D4590 /* v8test.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = v8test.hpp; sourceTree = "<group>"; };
+		46D3109122A90271001D4590 /* libv8_monolith.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_monolith.a; path = "ios-v8-test/v8/libv8_monolith.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46D3109222A90271001D4590 /* libv8_monolith.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +50,7 @@
 			children = (
 				46D3107622A90177001D4590 /* ios-v8-test */,
 				46D3107522A90177001D4590 /* Products */,
+				46D3109022A90270001D4590 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,9 +73,19 @@
 				46D3108022A90178001D4590 /* Assets.xcassets */,
 				46D3108222A90178001D4590 /* LaunchScreen.storyboard */,
 				46D3108522A90178001D4590 /* Info.plist */,
-				46D3108622A90178001D4590 /* main.m */,
+				46D3108622A90178001D4590 /* main.mm */,
+				46D3108D22A901DE001D4590 /* v8test.mm */,
+				46D3108E22A901DE001D4590 /* v8test.hpp */,
 			);
 			path = "ios-v8-test";
+			sourceTree = "<group>";
+		};
+		46D3109022A90270001D4590 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				46D3109122A90271001D4590 /* libv8_monolith.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,7 +159,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				46D3107C22A90177001D4590 /* ViewController.m in Sources */,
-				46D3108722A90178001D4590 /* main.m in Sources */,
+				46D3108F22A901DE001D4590 /* v8test.mm in Sources */,
+				46D3108722A90178001D4590 /* main.mm in Sources */,
 				46D3107922A90177001D4590 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,14 +304,23 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NQ596S94Q5;
 				INFOPLIST_FILE = "ios-v8-test/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ios-v8-test/v8",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "test.ios-v8-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = (
+					"/Users/minggo/sourcecode/test/ios-v8-test/ios-v8-test/v8",
+					"\"$(SRCROOT)/ios-v8-test/v8/include\"",
+				);
 			};
 			name = Debug;
 		};
@@ -302,14 +329,23 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NQ596S94Q5;
 				INFOPLIST_FILE = "ios-v8-test/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ios-v8-test/v8",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "test.ios-v8-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = (
+					"/Users/minggo/sourcecode/test/ios-v8-test/ios-v8-test/v8",
+					"\"$(SRCROOT)/ios-v8-test/v8/include\"",
+				);
 			};
 			name = Release;
 		};
